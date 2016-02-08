@@ -18,7 +18,6 @@ function fetchGPSCoords(theUrlParam) {
         success: function (resp) {
             console.log(resp);
             goodMarkers.push(resp);
-            coordsFound = true;
         },
         complete: function(){
             drawMarkers();
@@ -28,7 +27,7 @@ function fetchGPSCoords(theUrlParam) {
 
 
 function drawMarkers() {
-    theMarkersToDraw = goodMarkers;
+    var theMarkersToDraw = goodMarkers;
     
 
     var theMap = new google.maps.Map(document.getElementById('gMap'), {
