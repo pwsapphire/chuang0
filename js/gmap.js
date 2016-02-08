@@ -1,9 +1,9 @@
 var fakeMarkers = [];
 
 function createFakeMarkers() {
-    for (var index = 0; index < 5; index++) {
-        var latitude = Math.random() * 90 - 90;
-        var longitude = Math.random() * 360 - 180;
+    for (var index = 0; index < 10; index++) {
+        var latitude = Math.random() * (50-49) + 49;
+        var longitude = Math.random() * (7-5) + 5;
         fakeMarkers.push({ lat: latitude, lng: longitude });
     }
 }
@@ -12,9 +12,9 @@ function createFakeMarkers() {
 function initGmap() {
     createFakeMarkers();
     var theMap = new google.maps.Map(document.getElementById('gMap'), {
-        center: { lat: -34.397, lng: 150.644 },
+        center: { lat: 49.501413, lng: 5.951193 },
         scrollwheel: true,
-        zoom: 8
+        zoom: 6
     });
 
     for (var gpsCoords in fakeMarkers) {
