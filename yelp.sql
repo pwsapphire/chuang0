@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 08, 2016 at 01:44 PM
+-- Generation Time: Feb 08, 2016 at 02:13 PM
 -- Server version: 5.6.25
 -- PHP Version: 5.6.11
 
@@ -62,7 +62,16 @@ CREATE TABLE IF NOT EXISTS `location` (
 CREATE TABLE IF NOT EXISTS `role` (
   `rol_id` int(10) unsigned NOT NULL,
   `rol_name` enum('user','editor','admin') DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`rol_id`, `rol_name`) VALUES
+(1, 'user'),
+(2, 'editor'),
+(3, 'admin');
 
 -- --------------------------------------------------------
 
@@ -76,7 +85,16 @@ CREATE TABLE IF NOT EXISTS `usr` (
   `usr_email` varchar(50) DEFAULT NULL,
   `usr_password` varchar(50) DEFAULT NULL,
   `usr_date_of_creation` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `usr`
+--
+
+INSERT INTO `usr` (`usr_id`, `role_rol_id`, `usr_email`, `usr_password`, `usr_date_of_creation`) VALUES
+(3, 2, 'maghnia.dib.pro@gmail.com', '$2y$10$zwsUlaWwnYam7q2ZH8OAYeJoUKVQLG4RG3oOdEH78HQ', '2016-02-08 14:10:14'),
+(4, 3, 'perfect_sapphire@hotmail.com', '$2y$10$P/LHVRlaZ9kM/V84K4B3d.jX1cyyi1z4qFpBDf2ctRb', '2016-02-08 14:11:06'),
+(5, 2, 'deltgen.david@gmail.com', '$2y$10$t3hgpy3FJTsNG3NCV702Nul4Xbqonoqy0z9BpRX/A4g', '2016-02-08 14:11:28');
 
 --
 -- Indexes for dumped tables
@@ -127,12 +145,12 @@ ALTER TABLE `location`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `rol_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `rol_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `usr`
 --
 ALTER TABLE `usr`
-  MODIFY `usr_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `usr_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
