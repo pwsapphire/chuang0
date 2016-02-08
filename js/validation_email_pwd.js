@@ -1,5 +1,11 @@
 //lancement de JQUERY
 $(document).ready(function(){
+    
+    
+    // input type email existe. il est ainsi possible de determiner sa validité sans avoir recours aux expressions regulieres.
+    // si le mail entré est invalide, il est possible de le savoir au travers du selecteur css :invalid
+    
+    // http://www.w3schools.com/cssref/sel_invalid.asp
 
 $('#email_val').blur(function() {
  var reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
