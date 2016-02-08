@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 08, 2016 at 12:28 PM
+-- Generation Time: Feb 08, 2016 at 01:44 PM
 -- Server version: 5.6.25
 -- PHP Version: 5.6.11
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `location` (
 
 CREATE TABLE IF NOT EXISTS `role` (
   `rol_id` int(10) unsigned NOT NULL,
-  `rol_name` varchar(10) DEFAULT NULL
+  `rol_name` enum('user','editor','admin') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
