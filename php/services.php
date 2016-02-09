@@ -34,7 +34,7 @@ function getGPSCoordsArray($theAddresses) {
 }
 
 //implementation du service Places de google.
-function getPlaces($searchedPlace, $placeType) {
+function getPlaces($searchedPlace, $placeType, $saveArray = false) {
     global $myAPIKey;
     $requestLink = "https://maps.googleapis.com/maps/api/place/textsearch/json?query={$searchedPlace}&type={$placeType}&key={$myAPIKey}";
     $theAnswer = file_get_contents($requestLink); // recupere le resultat de la requete au service.
@@ -43,13 +43,27 @@ function getPlaces($searchedPlace, $placeType) {
     //var_dump(json_decode($theAnswer));
     $results = json_decode($theAnswer, TRUE);
     $gpsCoords = array();
-    var_dump($results);
+    //var_dump($results);
+    $allPlaces = array();
+    $nextPageExists = false;
+    
+
     foreach($results['results'] as $result) {
         //var_dump($result);
+        if ($saveArray) {
+            $placeObj = array('id' => $result['id'],
+                              'name' => $result['name'],
+                              'rating' => $result['rating'], 
+                              'photoRef' => $result['photos'][0]['photo_reference'], 
+                              'place_id' => $result['place_id'], 'types' => $result['types'], 
+                              'location' => $result['geometry']['location'],
+                              'formatted_address' => $result['vicinity']);
+            $allPlaces[] = $placeObj;
+        }
         $googleCoords = $result['geometry']['location']; // format la reponse pour etre insérée dans un marqueur google maps.
         $gpsCoords[] = $googleCoords;
     }
-    
+	file_put_contents('../data/places.json', json_encode($allPlaces)); 
     return json_encode($gpsCoords);
 }
 
@@ -64,7 +78,7 @@ if (isset($_POST['service'])) {
             echo getGPSCoordsArray($_POST['params']); //print la reponse en fonction des adresses soumises en post.
             break;
         case 'places':
-            echo getPlaces($_POST['params'][0], $_POST['params'][1]); //post[param][0] = query, [1] = type
+            echo getPlaces($_POST['params'][0], $_POST['params'][1], $_POST['params'][2]); //post[param][0] = query, [1] = type
             break;
 
         default:

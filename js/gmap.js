@@ -71,7 +71,7 @@ function drawMarkers(theMap) {
     });
 
     for (var gpsCoords in theMarkersToDraw) {
-        console.log(theMarkersToDraw[gpsCoords]);
+        //console.log(theMarkersToDraw[gpsCoords]);
         new google.maps.Marker({
             position: theMarkersToDraw[gpsCoords],
             map: theMap,
@@ -97,6 +97,6 @@ function initGmap() {
     //fetchDataForServiceWithParams(testAddress, 'gMap', 'gpsCoords', addToMarkerList, drawMarkers);
     
     //utilisation du service Places de google:
-    var params = [encodeURIComponent('restaurant from luxemburg'),encodeURIComponent('restaurant')];
+    var params = [encodeURIComponent('restaurant from luxemburg'),encodeURIComponent('food|bar'),true];
     fetchDataForServiceWithParams(params, 'gMapPlaces', 'places', addToMarkerList, drawMarkers);
 }
