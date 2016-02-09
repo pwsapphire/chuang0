@@ -11,6 +11,13 @@
         <!-- Emplacement Google Maps -->
         <div id="gMap"></div>
         
+        <!-- Test Connection DB via config.php -->
+        <?php
+            include 'php/config.php';
+            
+            echo checkUser('deltgen.david@gmail.com', 'webforce3');
+        
+        ?>
         
         <!-- Emplacement du slider avec les 10 derniers lieux: BONUS -->
         

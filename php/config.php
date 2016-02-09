@@ -2,9 +2,10 @@
 session_start();
 
 // Connexion à la DB
-$dsn = 'mysql:dbname=yelp;host=localhost;charset=UTF8';
+$yuyuIp = '192.168.210.85';
+$dsn = 'mysql:dbname=yelp;host={$yuyuIp};charset=UTF8';
 $user = 'root';
-$passwordDb = 'Ludivine';
+$passwordDb = 'webforce3';
 // Effectuer la connexion
 $pdo = new PDO($dsn, $user, $passwordDb);
 
