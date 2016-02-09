@@ -1,5 +1,5 @@
         <footer>
-            copyright &copy; 2016
+            <p>copyright &copy; 2016</p>
         </footer>        
     </body>
     <script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
