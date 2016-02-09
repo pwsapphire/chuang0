@@ -5,9 +5,12 @@ require 'config.php';
 <html>
 <head>
 	<title>User sign up</title>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="../css/mainStyle.css">
 </head>
 <body>
-<pre><?php
+<pre>
+<?php
 
 
 // si formulaire soumis
