@@ -42,10 +42,11 @@ function getPlaces($searchedPlace, $placeType, $saveArray = false) {
     //echo $requestLink;
     //var_dump(json_decode($theAnswer));
     $results = json_decode($theAnswer, TRUE);
+    $nextPageToken = $results['next_page_token'];
     $gpsCoords = array();
     //var_dump($results);
     $allPlaces = array();
-    $nextPageExists = false;
+    
     
 
     foreach($results['results'] as $result) {
@@ -53,11 +54,12 @@ function getPlaces($searchedPlace, $placeType, $saveArray = false) {
         if ($saveArray) {
             $placeObj = array('id' => $result['id'],
                               'name' => $result['name'],
-                              'rating' => $result['rating'], 
-                              'photoRef' => $result['photos'][0]['photo_reference'], 
-                              'place_id' => $result['place_id'], 'types' => $result['types'], 
+                              'rating' =>isset($result['rating']) ?  $result['rating'] : '', 
+                              'photoRef' => isset($result['photos'][0]['photo_reference']) ? $result['photos'][0]['photo_reference'] : '', 
+                              'place_id' => $result['place_id'], 
+                              'types' => $result['types'], 
                               'location' => $result['geometry']['location'],
-                              'formatted_address' => $result['vicinity']);
+                              'formatted_address' => $result['formatted_address']);
             $allPlaces[] = $placeObj;
         }
         $googleCoords = $result['geometry']['location']; // format la reponse pour etre insérée dans un marqueur google maps.
