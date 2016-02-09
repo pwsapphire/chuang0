@@ -31,6 +31,7 @@ function addToMarkerList(jsonAnswer) {
     goodMarkers = jsonAnswer;
 }
 
+
 //function debug qui print data
 function print(data){
     console.log(data);
@@ -51,7 +52,7 @@ function fetchDataForServiceWithParams(params, mapDiv, serviceWanted, onSuccesFu
         error: function(e){
           console.log(e.responseText);  
         },
-        complete: function (e) {
+        complete: function () {
             onCompleteFunction(mapDiv);
             //drawMarkers(mapDiv);
         }
@@ -70,6 +71,7 @@ function drawMarkers(theMap) {
     });
 
     for (var gpsCoords in theMarkersToDraw) {
+        console.log(theMarkersToDraw[gpsCoords]);
         new google.maps.Marker({
             position: theMarkersToDraw[gpsCoords],
             map: theMap,
@@ -96,5 +98,5 @@ function initGmap() {
     
     //utilisation du service Places de google:
     var params = [encodeURIComponent('restaurant from luxemburg'),encodeURIComponent('restaurant')];
-    //fetchDataForServiceWithParams(params, 'gMapPlaces', 'places', print, print);
+    fetchDataForServiceWithParams(params, 'gMapPlaces', 'places', addToMarkerList, drawMarkers);
 }

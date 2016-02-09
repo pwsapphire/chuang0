@@ -38,10 +38,19 @@ function getPlaces($searchedPlace, $placeType) {
     global $myAPIKey;
     $requestLink = "https://maps.googleapis.com/maps/api/place/textsearch/json?query={$searchedPlace}&type={$placeType}&key={$myAPIKey}";
     $theAnswer = file_get_contents($requestLink); // recupere le resultat de la requete au service.
+
+    //echo $requestLink;
+    //var_dump(json_decode($theAnswer));
+    $results = json_decode($theAnswer, TRUE);
+    $gpsCoords = array();
+    var_dump($results);
+    foreach($results['results'] as $result) {
+        //var_dump($result);
+        $googleCoords = $result['geometry']['location']; // format la reponse pour etre insérée dans un marqueur google maps.
+        $gpsCoords[] = $googleCoords;
+    }
     
-    echo $requestLink;
-    echo $theAnswer;
-    
+    return json_encode($gpsCoords);
 }
 
 
@@ -55,7 +64,7 @@ if (isset($_POST['service'])) {
             echo getGPSCoordsArray($_POST['params']); //print la reponse en fonction des adresses soumises en post.
             break;
         case 'places':
-            echo getPlaces($_POST['params'][0],$_POST['params'][1]); //post[param][0] = query, [1] = type
+            echo getPlaces($_POST['params'][0], $_POST['params'][1]); //post[param][0] = query, [1] = type
             break;
 
         default:
