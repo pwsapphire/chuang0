@@ -39,6 +39,7 @@ function getPlaces($searchedPlace, $placeType) {
     $requestLink = "https://maps.googleapis.com/maps/api/place/textsearch/json?query={$searchedPlace}&type={$placeType}&key={$myAPIKey}";
     $theAnswer = file_get_contents($requestLink); // recupere le resultat de la requete au service.
     
+    echo $requestLink;
     echo $theAnswer;
     
 }

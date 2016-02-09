@@ -95,6 +95,6 @@ function initGmap() {
     //fetchDataForServiceWithParams(testAddress, 'gMap', 'gpsCoords', addToMarkerList, drawMarkers);
     
     //utilisation du service Places de google:
-    var params = [encodeURIComponent('in luxemburg'),encodeURIComponent('restaurant')];
-    fetchDataForServiceWithParams(params, 'gMapPlaces', 'places', print, print);
+    var params = [encodeURIComponent('restaurant from luxemburg'),encodeURIComponent('restaurant')];
+    //fetchDataForServiceWithParams(params, 'gMapPlaces', 'places', print, print);
 }
