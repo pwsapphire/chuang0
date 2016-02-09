@@ -1,4 +1,4 @@
-#gMap, #gMapPlaces{
+#gMap{
     width: 500px;
     height: 500px;
 }
@@ -19,6 +19,7 @@ body{
 
 }
 header{
+	padding: 5px;
 	height: 100px;
 	width: 100%;	
 	background: rgb(207,4,4); /* Old browsers */
@@ -27,7 +28,18 @@ header{
 	background: linear-gradient(to bottom,  rgba(207,4,4,1) 0%,rgba(255,48,25,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cf0404', endColorstr='#ff3019',GradientType=0 ); /* IE6-9 */
 }
+header h1 {
+	display: inline;
+	font-family: 'Fredoka One', cursive;
+	color: white;
+	font-size: 5em;
+}
+header h1:first-child{
+	padding-left: 30px;
+	color: black;
+}
 nav{
+
 	text-align: center;
 }
 li{
