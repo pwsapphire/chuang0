@@ -8,6 +8,10 @@ require 'inc/header.php';
         <div id="gMap"></div>
         
         
+        <!-- Partie dédiée a la récupération de differentes "Places" via l'API Google, et leur affichage -->
+        <div id="gMapPlaces"></div>
+        
+        
         <!-- Emplacement du slider avec les 10 derniers lieux: BONUS -->
 <?php
 require 'inc/footer.php';
