@@ -27,9 +27,9 @@ function addToMarkerList(jsonAnswer) {
 
 
 //Récupere les coordonnées gps d'une liste d'adresses.
-function fetchGPSCoordsForAddresses(addressesArray) {
+function fetchGPSCoordsForAddresses(addressesArray, mapDiv) {
     $.ajax({
-        url: 'https://localhost:85/Yelp/php/backend.php',
+        url: 'https://localhost:85/Yelp/php/services.php',
         data: {'addresses[]':addressesArray},
         method: "POST",
         dataType: "json",
@@ -40,17 +40,17 @@ function fetchGPSCoordsForAddresses(addressesArray) {
           console.log(e.responseText);  
         },
         complete: function () {
-            drawMarkers();
+            drawMarkers(mapDiv);
         }
     });
 }
 
-//Place les marqueurs sur la map
-function drawMarkers() {
+//Place les marqueurs sur la map spécifiée en parametre de fonction
+function drawMarkers(theMap) {
     var theMarkersToDraw = goodMarkers;
 
 
-    var theMap = new google.maps.Map(document.getElementById('gMap'), {
+    var theMap = new google.maps.Map(document.getElementById(theMap), {
         center: { lat: 49.501413, lng: 5.951193 },
         scrollwheel: true,
         zoom: 6
@@ -78,5 +78,5 @@ function initGmap() {
         encodeURIComponent("12 AVENUE DU ROCK'N'ROLL L-4361 ESCH-SUR-ALZETTE"),
         encodeURIComponent("132 ROUTE DE BASCHARAGE L-4513 NIEDERKORN")];
 
-    fetchGPSCoordsForAddresses(testAddress);
+    fetchGPSCoordsForAddresses(testAddress, 'gMap');
 }
