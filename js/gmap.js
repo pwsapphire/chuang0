@@ -1,6 +1,12 @@
 var fakeMarkers = [];
 var goodMarkers = [];
 
+//tableaux qui contiendront les adresses respectives aux type d'etablissement qu'ils representent ?.
+var restaurants = [];
+var bars = [];
+var cinemas = [];
+
+
 //Permet de créer des marqueurs google aleatoires dans une zone specifique.
 //C'est une fonction utilisée a des fins de test lorsque nous n'avions pas de données.
 //Dans notre cas, dans les environs du luxembourg.
@@ -15,7 +21,7 @@ function createFakeMarkers() {
 
 
 
-//Insere le resultat de la fonction fetchGPSCoordsForAddresses dans le tableau goodMarkers.
+//Insere le resultat de la fonction fetchDataForServiceWithParams dans le tableau goodMarkers.
 function addToMarkerList(jsonAnswer) {
     console.log('going to fill markers list');
    /* for (var coords in jsonAnswer) {
@@ -26,11 +32,12 @@ function addToMarkerList(jsonAnswer) {
 }
 
 
-//Récupere les coordonnées gps d'une liste d'adresses.
-function fetchGPSCoordsForAddresses(addressesArray, mapDiv) {
+//Récupere les données d'un service choisit avec des parametres.
+function fetchDataForServiceWithParams(params, mapDiv, serviceWanted) {
     $.ajax({
         url: 'https://localhost:85/Yelp/php/services.php',
-        data: {'addresses[]':addressesArray},
+        data: {'service':serviceWanted,
+               'params[]':params},
         method: "POST",
         dataType: "json",
         success: function (resp) {
@@ -77,6 +84,10 @@ function initGmap() {
         encodeURIComponent("12 Place Chevert, 55100 Verdun, France"),
         encodeURIComponent("12 AVENUE DU ROCK'N'ROLL L-4361 ESCH-SUR-ALZETTE"),
         encodeURIComponent("132 ROUTE DE BASCHARAGE L-4513 NIEDERKORN")];
-
-    fetchGPSCoordsForAddresses(testAddress, 'gMap');
+        
+    //utilisation du service Maps de google:
+    fetchDataForServiceWithParams(testAddress, 'gMap', 'gpsCoords');
+    
+    //utilisation du service Places de google:
+    fetchDataForServiceWithParams(testAddress, 'gMapPlaces', 'places');
 }

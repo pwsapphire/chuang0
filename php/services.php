@@ -1,7 +1,11 @@
 <?php 
+
+//clef Google de David
+$myAPIKey = 'AIzaSyCH89EKdimLeM7wXrAfhbCvwOU6VBQbaYc';
+
 //Fonction permettant de recuperer les coordonnées GPS à partir d'une adresse complète soumise au servce de Google Maps
 function getGPSCoords($theAddress) {
-    $myAPIKey = 'AIzaSyCH89EKdimLeM7wXrAfhbCvwOU6VBQbaYc'; //clef Google de David
+    global $myAPIKey;
     //$formattedAddress = urlencode($theAddress); //Besoin d'encode l'adresse au format url?
     $formattedAddress = $theAddress;
 
@@ -29,6 +33,30 @@ function getGPSCoordsArray($theAddresses) {
     return json_encode($results);
 }
 
-?> <?php //echo getGPSCoords($_GET['address']); ?> <?php //var_dump($_POST);
-echo getGPSCoordsArray($_POST['addresses']); //print la reponse en fonction des adresses soumises en post.
+//implementation du service Places de google.
+function getPlaces($searchedPlace, $placeType) {
+    $requestLink = "https://maps.googleapis.com/maps/api/place/textsearch/json?query={$searchedPlace}&type={$type}&key={$myAPIKey}";
+}
+
+
+?> <?php // echo getGPSCoords($_GET['address']); ?> <?php // var_dump($_POST); ?> <?php 
+//depending on a parameter, page executes a specific fonction:
+//first post param = service desired, second post, an array
+
+if (isset($_POST['service'])) {
+    switch ($_POST['service']) {
+        case 'gpsCoords':
+            echo getGPSCoordsArray($_POST['params']); //print la reponse en fonction des adresses soumises en post.
+            break;
+        case 'places':
+            echo getPlaces($_POST['params']); //print la reponse en fonction des adresses soumises en post.
+            break;
+
+        default:
+            #code...
+            break;
+    }
+} else {
+    echo 'nothing to show here';
+}
 ?>
