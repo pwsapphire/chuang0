@@ -3,10 +3,11 @@ session_start();
 
 // Connexion à la DB
 $yuyuIp = '192.168.210.85';
-$dsn = 'mysql:dbname=yelp;host={$yuyuIp};charset=UTF8';
-$user = 'root';
+$dsn = "mysql:dbname=yelp;host={$yuyuIp};charset=UTF8";
+$user = 'yelp';
 $passwordDb = 'webforce3';
 // Effectuer la connexion
+//echo $dsn;
 $pdo = new PDO($dsn, $user, $passwordDb);
 
 // Un define, une constante
@@ -29,7 +30,7 @@ function checkUser($userEmail, $userPassword, $alreadyHashed = false) {
             // Je récupère le mot de passe
             $res = $pdoStatement->fetch();
             $passwordHashed = $res['usr_password'];
-            $userRole = $res['usr_role'];
+            $userRole = $res['role_rol_id'];
 
             // Si le mot de passe fourni est déjà haché
             if ($alreadyHashed) {
