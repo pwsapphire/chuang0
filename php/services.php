@@ -2,6 +2,7 @@
 
 //clef Google de David
 $myAPIKey = 'AIzaSyCH89EKdimLeM7wXrAfhbCvwOU6VBQbaYc';
+$allPlaces = array();
 
 //Fonction permettant de recuperer les coordonnées GPS à partir d'une adresse complète soumise au servce de Google Maps
 function getGPSCoords($theAddress) {
@@ -42,32 +43,58 @@ function getPlaces($searchedPlace, $placeType, $saveArray = false) {
     //echo $requestLink;
     //var_dump(json_decode($theAnswer));
     $results = json_decode($theAnswer, TRUE);
-    $nextPageToken = $results['next_page_token'];
+    $pageHasNextToken = $results['next_page_token'];
+    var_dump($results);
     $gpsCoords = array();
     //var_dump($results);
-    $allPlaces = array();
+    global $allPlaces;
     
+    storePlaceInArray($results);
     
-
-    foreach($results['results'] as $result) {
-        //var_dump($result);
-        if ($saveArray) {
-            $placeObj = array('id' => $result['id'],
-                              'name' => $result['name'],
-                              'rating' =>isset($result['rating']) ?  $result['rating'] : '', 
-                              'photoRef' => isset($result['photos'][0]['photo_reference']) ? $result['photos'][0]['photo_reference'] : '', 
-                              'place_id' => $result['place_id'], 
-                              'types' => $result['types'], 
-                              'location' => $result['geometry']['location'],
-                              'formatted_address' => $result['formatted_address']);
-            $allPlaces[] = $placeObj;
-        }
-        $googleCoords = $result['geometry']['location']; // format la reponse pour etre insérée dans un marqueur google maps.
-        $gpsCoords[] = $googleCoords;
+    if ($pageHasNextToken) {
+        getPlacesWithToken($results['next_page_token']);
     }
-	file_put_contents('../data/places.json', json_encode($allPlaces)); 
-    return json_encode($gpsCoords);
+    
+    
+    //print_r($allPlaces);
+    file_put_contents('../data/places.json', json_encode($allPlaces));
 }
+
+function getPlacesWithToken($token) {
+    global $myAPIKey;
+    $requestLink = "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken={$token}&key={$myAPIKey}";
+    $theAnswer = file_get_contents($requestLink); // recupere le resultat de la requete au service.
+
+    //echo $requestLink;
+    //var_dump(json_decode($theAnswer));
+    $results = json_decode($theAnswer, TRUE);
+    $pageHasNextToken = isset($results['next_page_token']);
+    global $allPlaces;
+    
+    storePlaceInArray($results);
+    
+    if ($pageHasNextToken) {
+        getPlacesWithToken($results['next_page_token']);
+    }
+}
+
+
+function storePlaceInArray($places) {
+    global $allPlaces;
+
+    foreach($places['results'] as $result) {
+        $placeObj = array('id' => $result['id'], 
+                          'name' => $result['name'], 
+                          'rating' => isset($result['rating']) ? $result['rating'] : '', 
+                          'photoRef' => isset($result['photos'][0]['photo_reference']) ? $result['photos'][0]['photo_reference'] : '', 
+                          'place_id' => $result['place_id'], 
+                          'types' => $result['types'], 
+                          'location' => $result['geometry']['location'], 
+                          'formatted_address' => $result['formatted_address']);
+        $allPlaces[] = $placeObj;
+    }
+}
+
 
 
 ?> <?php // echo getGPSCoords($_GET['address']); ?> <?php // var_dump($_POST); ?> <?php 
