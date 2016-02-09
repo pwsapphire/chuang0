@@ -35,7 +35,12 @@ function getGPSCoordsArray($theAddresses) {
 
 //implementation du service Places de google.
 function getPlaces($searchedPlace, $placeType) {
-    $requestLink = "https://maps.googleapis.com/maps/api/place/textsearch/json?query={$searchedPlace}&type={$type}&key={$myAPIKey}";
+    global $myAPIKey;
+    $requestLink = "https://maps.googleapis.com/maps/api/place/textsearch/json?query={$searchedPlace}&type={$placeType}&key={$myAPIKey}";
+    $theAnswer = file_get_contents($requestLink); // recupere le resultat de la requete au service.
+    
+    echo $theAnswer;
+    
 }
 
 
@@ -49,7 +54,7 @@ if (isset($_POST['service'])) {
             echo getGPSCoordsArray($_POST['params']); //print la reponse en fonction des adresses soumises en post.
             break;
         case 'places':
-            echo getPlaces($_POST['params']); //print la reponse en fonction des adresses soumises en post.
+            echo getPlaces($_POST['params'][0],$_POST['params'][1]); //post[param][0] = query, [1] = type
             break;
 
         default:

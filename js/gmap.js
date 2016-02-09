@@ -31,9 +31,13 @@ function addToMarkerList(jsonAnswer) {
     goodMarkers = jsonAnswer;
 }
 
+//function debug qui print data
+function print(data){
+    console.log(data);
+}
 
 //Récupere les données d'un service choisit avec des parametres.
-function fetchDataForServiceWithParams(params, mapDiv, serviceWanted) {
+function fetchDataForServiceWithParams(params, mapDiv, serviceWanted, onSuccesFunction, onCompleteFunction) {
     $.ajax({
         url: 'https://localhost:85/Yelp/php/services.php',
         data: {'service':serviceWanted,
@@ -41,13 +45,15 @@ function fetchDataForServiceWithParams(params, mapDiv, serviceWanted) {
         method: "POST",
         dataType: "json",
         success: function (resp) {
-            addToMarkerList(resp);
+            onSuccesFunction(resp);
+            //addToMarkerList(resp);
         },
         error: function(e){
           console.log(e.responseText);  
         },
-        complete: function () {
-            drawMarkers(mapDiv);
+        complete: function (e) {
+            onCompleteFunction(mapDiv);
+            //drawMarkers(mapDiv);
         }
     });
 }
@@ -86,8 +92,9 @@ function initGmap() {
         encodeURIComponent("132 ROUTE DE BASCHARAGE L-4513 NIEDERKORN")];
         
     //utilisation du service Maps de google:
-    fetchDataForServiceWithParams(testAddress, 'gMap', 'gpsCoords');
+    //fetchDataForServiceWithParams(testAddress, 'gMap', 'gpsCoords', addToMarkerList, drawMarkers);
     
     //utilisation du service Places de google:
-    fetchDataForServiceWithParams(testAddress, 'gMapPlaces', 'places');
+    var params = [encodeURIComponent('in luxemburg'),encodeURIComponent('restaurant')];
+    fetchDataForServiceWithParams(params, 'gMapPlaces', 'places', print, print);
 }
