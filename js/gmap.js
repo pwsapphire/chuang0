@@ -81,6 +81,40 @@ function drawMarkers(theMap) {
 }
 
 
+//créé les vignettes pour simuler un slider
+function createSlider(container, data){
+    //console.log(data);
+    var tagsToAdd = '';
+    tagsToAdd += '<ul>'
+    for (var index = 0; index < data.length; index++) {
+        //genere le code a ajouté au container
+        tagsToAdd += '<li class=\"sliderThumb\"><img src=\"img/fakeResto.jpg\" alt=\"' + data[index]['id'] + '\"><a href=\"#\">' + data[index]['name'] + '</a></li>';
+    }
+    tagsToAdd += '</ul>';
+    //ajoute le code html generé une fois la boucle terminée.
+    //console.log(tagsToAdd);
+    $(container).append(tagsToAdd);
+}
+
+function selectLocations(theId, howMany){
+    var params = [0, 10]; //select 10 items a partir de l'item 0.
+    
+    $.ajax({
+        url: 'https://localhost:85/Yelp/php/locations.php',
+        data: {'service':'lastTen',
+               'params[]':params},
+        method: "POST",
+        dataType: "json",
+        error: function(e){
+          console.log(e.responseText);  
+        },
+        complete: function (res) {
+            createSlider('#theSlider', res.responseJSON);
+        }
+    });
+}
+
+
 function initGmap() {
     //createFakeMarkers();
     
@@ -99,4 +133,7 @@ function initGmap() {
     //utilisation du service Places de google:
     var params = [encodeURIComponent('restaurant from luxemburg'),encodeURIComponent('food|bar'),true];
     //fetchDataForServiceWithParams(params, 'gMapPlaces', 'places', addToMarkerList, drawMarkers);
+    
+    //test de la recup de locations:
+    selectLocations(0, 10);
 }

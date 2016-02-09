@@ -6,6 +6,25 @@
 #coordsLoaded{
     display: none;
 }
+
+#theSlider{
+    background-color: orangered;
+    height: 100px;
+    width: 850px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: auto;
+}
+
+#theSlider a{
+    color: black;
+}
+
+.sliderThumb img{
+    width:65px;
+    height:65px;
+}
+
 *{
 	box-sizing: border-box;
 }
