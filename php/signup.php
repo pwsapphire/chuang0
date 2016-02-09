@@ -3,15 +3,14 @@
 require 'config.php';
 ?>
 <html>
-
-<head>
-    <title>User sign up</title>
-</head>
-
-<body>
-    <pre><?php 
-
-
+    <head>
+    	<title>User sign up</title>
+    	<meta charset="utf-8"/>
+        <title>User sign up</title>
+    </head>
+    <body>
+        <pre>
+<?php
 // si formulaire soumis
 if (!empty($_POST)) {
     print_r($_POST);

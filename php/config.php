@@ -3,7 +3,11 @@ session_start();
 
 // Connexion à la DB
 $yuyuIp = '192.168.210.85';
+<<<<<<< HEAD
 $dsn = "mysql:dbname=yelp;host={$yuyuIp};charset=UTF8";
+=======
+$dsn = 'mysql:dbname=yelp;host={$yuyuIp};charset=UTF8';
+>>>>>>> 9b8ede7a991828caee0259a9219a3555351bf0f3
 $user = 'yelp';
 $passwordDb = 'webforce3';
 // Effectuer la connexion
