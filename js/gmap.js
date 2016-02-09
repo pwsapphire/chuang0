@@ -1,6 +1,10 @@
 var fakeMarkers = [];
 var goodMarkers = [];
 
+//Permet de créer des marqueurs google aleatoires dans une zone specifique.
+//C'est une fonction utilisée a des fins de test lorsque nous n'avions pas de données.
+//Dans notre cas, dans les environs du luxembourg.
+//Ces marqueurs sont inseres dans la variable fakeMarkers.
 function createFakeMarkers() {
     for (var index = 0; index < 10; index++) {
         var latitude = Math.random() * (50 - 49) + 49;
@@ -9,6 +13,9 @@ function createFakeMarkers() {
     }
 }
 
+
+
+//Insere le resultat de la fonction fetchGPSCoordsForAddresses dans le tableau goodMarkers.
 function addToMarkerList(jsonAnswer) {
     console.log('going to fill markers list');
    /* for (var coords in jsonAnswer) {
@@ -18,6 +25,8 @@ function addToMarkerList(jsonAnswer) {
     goodMarkers = jsonAnswer;
 }
 
+
+//Récupere les coordonnées gps d'une liste d'adresses.
 function fetchGPSCoordsForAddresses(addressesArray) {
     $.ajax({
         url: 'https://localhost:85/Yelp/php/backend.php',
@@ -36,7 +45,7 @@ function fetchGPSCoordsForAddresses(addressesArray) {
     });
 }
 
-
+//Place les marqueurs sur la map
 function drawMarkers() {
     var theMarkersToDraw = goodMarkers;
 

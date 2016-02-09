@@ -4,7 +4,7 @@ $pdo = new PDO("sqlite:../DB/yelp.db");
 
 
 function resetOrCreateDbTables() {
-    
+
     global $pdo;
     $creationQuery = "PRAGMA foreign_keys = off;
                     BEGIN TRANSACTION;
@@ -50,7 +50,7 @@ function resetOrCreateDbTables() {
 
 function selectFromTableWithFieldsAndParams($tableName, $fields, $params = NULL) {
     global $pdo;
-    $sqlQuery = "select {$fields} from {$tableName} {$params}" ;
+    $sqlQuery = "select {$fields} from {$tableName} {$params}";
     //echo $sqlQuery;
     $pdoStatement = $pdo->query($sqlQuery);
     $result = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
