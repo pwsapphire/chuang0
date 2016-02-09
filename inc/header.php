@@ -15,10 +15,10 @@
 					</div>
 				</div>
 			    <nav>
-			        <ul>
+			        <ul>			            
+			            <li><a href="#">Local</a></li>
+			            <li><a href="#">User</a></li>
 			            <li><a href="#">Home</a></li>
-			            <li><a href="#">Local Mamagement</a></li>
-			            <li><a href="#">User Management</a></li>
 			        </ul>
 			    </nav>
 			  </div>
