@@ -53,13 +53,82 @@ if ($tokenOk) {
 	<form action="" method="post">
 		<fieldset>
 			<legend>Change password</legend>
-			<input type="hidden" name="email" value="<?php echo $emailClient; ?>" />
-			<input type="password" name="passwordToto1" value="" placeholder="Your password" /> (8 caractères minimum)<br />
-			<input type="password" name="passwordToto2" value="" placeholder="Confirm your password" /><br />
+			<input type="hidden" name="emailT" value="<?php echo $emailClient; ?>" />
+			<input type="password" name="passwordT1" value="" placeholder="Your password" /> (at least 8 characters)<br />
+			<input type="password" name="passwordT2" value="" placeholder="Confirm your password" /><br />
 			<input type="submit" value="Change password"><br />
 		</fieldset>
 	</form>
 <?php
+
+// si formulaire soumis
+if (!empty($_POST['emailT']) && !empty($_POST['passwordT1'])) {
+	print_r($_POST);
+
+	// Je récupère les données du post
+	$email = isset($_POST['emailT']) ? trim($_POST['emailT']) : '';
+	$password1 = isset($_POST['passwordT1']) ? trim($_POST['passwordT1']) : '';
+	$password2 = isset($_POST['passwordT2']) ? trim($_POST['passwordT2']) : '';
+
+	// Je fais les vérifications
+	$formOk = true;
+	if (empty($password1)) {
+		echo 'password empty<br />';
+		$formOk = false;
+	}
+	if ($password1 !== $password2) {
+		echo 'passwords are different<br />';
+		$formOk = false;
+	}
+	if(empty($email)) {
+		echo 'email empty<br />';
+		$formOk = false;
+	}
+	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		echo 'email not valid<br />';
+		$formOk = false;
+	}
+	if (strlen($password1) < 8) {
+		echo 'password too short<br />';
+		$formOk = false;
+	}
+	
+	// Si vérifs ok
+	if ($formOk) {
+		
+			// J'insère en DB
+			$insertUser = '
+				UPDATE usr 
+				SET usr_password=:password
+				WHERE usr_email = :email
+			';
+			// Je bind mes variables de requête
+			$pdoStatement = $pdo->prepare($insertUser);
+			$pdoStatement->bindValue(':email', $email, PDO::PARAM_STR);
+			// Je mets le password hashed dans une variable pour pouvoir la mettre en session
+			$passwordHashed = password_hash($password1, PASSWORD_BCRYPT);
+			$pdoStatement->bindValue(':password', $passwordHashed, PDO::PARAM_STR);
+
+			// J'exécute
+			if ($pdoStatement->execute()) {
+				echo 'password changed successfully<br />';
+				// On met les variables en session
+				//$_SESSION['sess_login'] = $email;
+				//$_SESSION['sess_password'] = $passwordHashed;
+				
+				header('Location: '.ABSOLUTE_URL.'signin.php');
+				exit;
+
+
+				
+			}
+			else {
+				echo 'ouch<br />';
+			}
+		
+	}
+}
+
 }
 ?>
 </body>
