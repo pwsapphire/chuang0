@@ -60,6 +60,9 @@ header{
 	width: 115px;
 	border-right: solid 1px #ff8080;
 }
+h1{
+    text-shadow: 0px 0px 3px #000000, 0px 0px 10px #330000;
+}
 header h1 {
 	display: inline;
 	font-family: 'Fredoka One', cursive;
