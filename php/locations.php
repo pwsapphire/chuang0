@@ -113,7 +113,6 @@ if (!empty($_SESSION)) {
                 }
             }
         }
-<<<<<<< HEAD
     }
 }
 // J'initialise les variables affichés (echo) dans le form pour éviter les "NOTICE"
@@ -137,31 +136,7 @@ if (!empty($_SESSION)) {
     $locList = array();
     
     $sql = '
-        SELECT loc_id, loc_name
-=======
-        // J'initialise les variables affichés (echo) dans le form pour éviter les "NOTICE"
-        $currentId = 0;
-        $adr_id = 0;
-        $cp_id = 0;
-        $ville_id = 0;
-        $loc_id = 0;
-        $loc_name = '';
-        $loc_type = '';
-        $loc_adresse = '';
-        $loc_cp = '';
-        $loc_ville = '';
-        $loc_desc = '';
-        $loc_gps_lat = 0.0;
-        $loc_gps_long = 0.0;
-
-
-        //je selectionne tous les lieux de la table location
-        // J'initialise ma variable de retour
-        $locList = array();
-
-        $sql = '
         SELECT loc_id, loc_name 
->>>>>>> origin/master
         FROM location
     ';
         $pdoStatement = $pdo->query($sql);
