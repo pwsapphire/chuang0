@@ -115,6 +115,6 @@ if (isset($_POST['service'])) {
             break;
     }
 } else {
-    echo 'nothing to show here';
+    //echo 'nothing to show here';
 }
 ?>

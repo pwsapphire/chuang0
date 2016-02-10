@@ -139,6 +139,7 @@
     $pdoStatement = $pdo->query($sql);
     if ($pdoStatement && $pdoStatement->rowCount() > 0) {
         $locList = $pdoStatement->fetchAll();
+        //print_r($loclist);
     };
             
            // Si l'id est passé en paramètre de l'URL : "locations.php?id=54" => $_GET['id'] a pour valeur 54
