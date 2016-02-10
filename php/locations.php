@@ -10,7 +10,7 @@
             // Require connexion DB
             require 'config.php';
             require 'services.php';
-
+if(!empty($_SESSION)){
             // je vérifie que le user est admin
                 $checkRole = ' 
             SELECT usr_email, role_rol_id
@@ -230,6 +230,9 @@
 <?php
 
 }
+
+}
+else echo "vous devez vous logger .";
 ?>
     </body>
 </html>
