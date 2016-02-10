@@ -113,8 +113,7 @@ if (!empty($_SESSION)) {
                 }
             }
         }
-    }
-}
+    
 // J'initialise les variables affichés (echo) dans le form pour éviter les "NOTICE"
             $currentId = 0;
             $adr_id = 0;
