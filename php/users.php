@@ -160,6 +160,10 @@ if(!empty($_SESSION)){
         <fieldset>
                 <input type="hidden" name="usr_id" value="<?php echo $currentId; ?>" />
                 <table>
+                 <tr>
+                        <td>Email :&nbsp;</td>
+                        <td><input type="text" name="usr_email" value="<?php echo $usr_email; ?>"/></td>
+                    </tr>
                     <tr>
                         <td>Password :&nbsp;</td>
                         <td><input type="text" name="usr_password" value="<?php echo $usr_password; ?>"/></td>
