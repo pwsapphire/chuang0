@@ -8,12 +8,18 @@
     </head>
     <body>
 		<header>
-			<h1>Y</h1><h1>elp</h1>
-		    <nav>
-		        <ul>
-		            <li><a href="#">Home</a></li>
-		            <li><a href="#">Local Mamagement</a></li>
-		            <li><a href="#">User Management</a></li>
-		        </ul>
-		    </nav>
+			<div id="header">
+				<div id="logo0">
+					<div id="logo1">
+						<h1>Y</h1><h1>elp</h1>
+					</div>
+				</div>
+			    <nav>
+			        <ul>			            
+			            <li><a href="#">Local</a></li>
+			            <li><a href="#">User</a></li>
+			            <li><a href="#">Home</a></li>
+			        </ul>
+			    </nav>
+			  </div>
 		</header>
