@@ -133,7 +133,7 @@ if(!empty($_SESSION)){
     $locList = array();
     
     $sql = '
-        SELECT loc_id, loc_name, 
+        SELECT loc_id, loc_name
         FROM location
     ';
     $pdoStatement = $pdo->query($sql);
