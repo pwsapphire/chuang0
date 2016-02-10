@@ -96,17 +96,18 @@ function createSlider(container, data){
     $(container).append(tagsToAdd);
 }
 
+//select x number of locations based on first id via ajax call to locations.php
 function selectLocations(theId, howMany){
     var params = [0, 10]; //select 10 items a partir de l'item 0.
     
     $.ajax({
         url: 'https://localhost:85/Yelp/php/locations.php',
-        data: {'service':'lastTen',
+        data: {'service':'lastTen', //differents services fournis
                'params[]':params},
         method: "POST",
         dataType: "json",
         error: function(e){
-          console.log(e.responseText);  
+          console.log(e.responseText);  //si marche pas, il affiche la cause.
         },
         complete: function (res) {
             createSlider('#theSlider', res.responseJSON);
